@@ -6,11 +6,9 @@ import slugify from 'slugify';
 import './App.css';
 import Summary from './Summary'
 import Features from './Features'
+import Total from './Total'
 
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
+
 
 class App extends Component {
   state = {
@@ -43,10 +41,6 @@ class App extends Component {
   };
 
   render() {
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost,
-      0
-    );
     return (
       <div className="App">
         <header>
@@ -82,12 +76,7 @@ class App extends Component {
                 )
               })
             }
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
+            <Total selected={this.state.selected} />
           </section>
         </main>
       </div>
