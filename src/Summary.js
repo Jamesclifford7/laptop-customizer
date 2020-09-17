@@ -1,27 +1,27 @@
 import React from 'react'
+import Option from './Option'
 import Total from './Total'
 
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
-
 function Summary(props) {
-    const featureHash = props.feature + '-' + props.idx;
-      const selectedOption = props.selected[props.feature];
-
       return (
-        <div>
-          <div className="summary__option" key={featureHash}>
-            <div className="summary__option__label">{props.feature} </div>
-            <div className="summary__option__value">{selectedOption.name}</div>
-            <div className="summary__option__cost">
-              {USCurrencyFormat.format(selectedOption.cost)}
-            </div>
-          </div>
-        </div>
+        <section className="main__summary">
+            <h2>Your cart</h2>
+            {
+              Object.keys(props.selected).map((feature, idx) => {
+                return (
+                  <Option
+                  key={idx}
+                  feature={feature}
+                  selected={props.selected} />
+                )
+              })
+            }
+            <Total selected={props.selected} />
+      </section>  
       );
 
 }
 
 export default Summary
+
+

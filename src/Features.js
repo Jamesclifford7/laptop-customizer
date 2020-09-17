@@ -1,32 +1,20 @@
 import React from 'react'
-import slugify from 'slugify';
-import Item from './Item'
-
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-  });
+import Specs from './Specs'
 
 function Features(props) {
-  const featureHash = props.feature + '-' + props.idx;
     return (
-      <fieldset className="feature" key={featureHash}>
-        <legend className="feature__name">
-          <h3>{props.feature}</h3>
-        </legend>
-        {
-          props.features[props.feature].map(item => {
+      <form className="main__form">
+          <h2>Customize your laptop</h2>
+          {
+          Object.keys(props.features).map((feature, idx) => {
             return (
-              <Item 
-              feature={props.feature}
-              item={item}
-              selected={props.selected}
-              updateFeature={props.updateFeature} />
-            )
-          })
-        }
-      </fieldset>
+              <Specs updateFeature={props.updateFeature} selected={props.selected} features={props.features} feature={feature} key={idx} />
+              )
+            })
+          }
+      </form>
     );
 }
 
 export default Features
+

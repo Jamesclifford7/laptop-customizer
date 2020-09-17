@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-
-// Normalizes string as a slug - a string that is safe to use
-// in both URLs and html attributes
-import slugify from 'slugify';
 import './App.css';
 import Summary from './Summary'
 import Features from './Features'
-import Total from './Total'
-
-
 
 class App extends Component {
   state = {
@@ -47,37 +40,12 @@ class App extends Component {
           <h1>ELF Computing | Laptops</h1>
         </header>
         <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {
-            Object.keys(this.props.features).map((feature, idx) => {
-              return (
-                <Features
-                idx={idx}
-                key={idx}
-                feature={feature}
-                features={this.props.features}
-                selected={this.state.selected}
-                updateFeature={this.updateFeature}
-                 />
-              )
-            })
-          }
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {
-              Object.keys(this.state.selected).map((feature, idx) => {
-                return (
-                  <Summary
-                  feature={feature}
-                  idx={idx}
-                  selected={this.state.selected} />
-                )
-              })
-            }
-            <Total selected={this.state.selected} />
-          </section>
+          <Features
+          features={this.props.features}
+          selected={this.state.selected}
+          updateFeature={this.updateFeature} />
+          <Summary
+          selected={this.state.selected} />
         </main>
       </div>
     );
@@ -85,3 +53,4 @@ class App extends Component {
 }
 
 export default App;
+
